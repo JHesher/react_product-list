@@ -1,1 +1,1 @@
-- [DEMO LINK](https://jhesher.github.io/react_product-list//)
+- [DEMO LINK](https://jhesher.github.io/react_product-list/)
