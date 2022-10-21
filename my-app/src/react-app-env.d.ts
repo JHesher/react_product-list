@@ -1,3 +1,9 @@
 /// <reference types="react-scripts" />
 
-export {}
+type Product = {
+  id: number,
+  name: string,
+  price: string,
+  src: string
+}
+
