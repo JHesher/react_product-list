@@ -125,11 +125,46 @@
       height: 130px;
       background-color: $bg;
     }
+
+    .MuiCardContent-root {
+      padding: 0 20px;
+      .MuiTypography-root {
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 24px;
+        margin-bottom: 10px;
+      }
+    }
+
+    .MuiCardActions-root {
+      padding: 0 20px;
+      .MuiTypography-root {
+        font-weight: 500;
+        font-size: 20px;
+        line-height: 30px;
+      }
+    }
+
+    .MuiSvgIcon-root {
+      width: 1.2em;
+      height: 1.2em;
+    }
+
+    .MuiCardMedia-root {
+      width: 40%;
+      padding: 10px;
+    }
+
+    .MuiBox-root {
+      width: 60%;
+      justify-content: center;
+    }
   }
 
   &__like {
-    .MuiPaper-root {
+    .MuiSvgIcon-root {
       color: $gray;
+      fill: $gray;
     }
   }
 }

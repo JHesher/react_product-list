@@ -4,7 +4,6 @@ import { FixedSizeGrid as Grid, GridChildComponentProps } from 'react-window';
 import AutoSizer from "react-virtualized-auto-sizer";
 import { useGlobalState } from '../../initialState/initialState';
 import './ProductListPage.scss';
-import { NavLink } from 'react-router-dom';
 import { fetchProducts } from '../../api/api';
 
 export const ProductListPage: React.FC = () => {
@@ -56,12 +55,9 @@ const ItemRenderer = ({ columnIndex, rowIndex, style, data }: GridChildComponent
   };
 
   return (
-    <div
-      // to={`/product-page?id=${data[rowIndex + columnIndex].id}`}
-      style={styles}
-    >
+    <div style={styles}>
       <ProductCard
-        product={data[rowIndex + columnIndex]}
+        product={data[rowIndex + (columnIndex * 4)]}
         type={'productsListPage'}
       />
     </div>

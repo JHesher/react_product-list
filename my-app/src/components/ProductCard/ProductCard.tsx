@@ -7,6 +7,7 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { useGlobalState } from '../../initialState/initialState';
+import ReactImageMagnify from 'react-image-magnify';
 import './ProductCard.scss';
 
 type Props = {
@@ -16,18 +17,44 @@ type Props = {
 
 export const ProductCard: React.FC<Props> = ({ product, type }) => {
   const [favorites, setFavorites] = useGlobalState('favorites');
+  const handleCheck = (product: Product) => {
+    if (favorites.find(item => item.id === product.id)) {
+      setFavorites(favorites.filter(item => item.id !== product.id));
+    } else {
+      setFavorites([
+        ...favorites,
+        product
+      ]);
+    }
+  }
+
   return (
     <div
-      className={`ProductCard ProductCard--${type}`}
+      className={`ProductCard ProductCard--${type} ${favorites.find(item => item.id === product?.id) && 'ProductCard__like'}`}
     >
       {product && (
         <Card>
-          <CardMedia
-            component="img"
-            height="225"
-            image={`https://testbackend.nc-one.com${product.src}`}
-            alt={product.name}
-          />
+          {type === 'productPage' ? (
+            <ReactImageMagnify {...{
+              smallImage: {
+                alt: `${product.name}`,
+                isFluidWidth: true,
+                src: `https://testbackend.nc-one.com${product?.src}`
+              },
+              largeImage: {
+                src: `https://testbackend.nc-one.com${product?.src}`,
+                width: 1200,
+                height: 1200
+              }
+            }} />
+          ) : (
+            <CardMedia
+              component="img"
+              height="225"
+              image={`https://testbackend.nc-one.com${product.src}`}
+              alt={product.name}
+            /> 
+          )}
           <Box sx={{ display: 'flex', flexDirection: 'column' }}>
             <CardContent>
               <Typography>
@@ -39,8 +66,8 @@ export const ProductCard: React.FC<Props> = ({ product, type }) => {
                 {`$ ${product.price}`}
               </Typography>
               <FavoriteIcon
-                className={`${favorites.find(item => item.id === product.id) && 'ProductCard__like'}`}
-                onClick={() => setFavorites([...favorites, product])}
+                className='ProductCard__like'
+                onClick={() => handleCheck(product)}
               />
             </CardActions>
           </Box>
